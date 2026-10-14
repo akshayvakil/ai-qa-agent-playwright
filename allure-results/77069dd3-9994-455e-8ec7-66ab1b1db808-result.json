@@ -1,0 +1,19 @@
+{
+    "name": "Verify successful login and adding Sauce Labs Backpack to cart from inventory page",
+    "status": "passed",
+    "start": 1792001652175,
+    "stop": 1792001652762,
+    "uuid": "77069dd3-9994-455e-8ec7-66ab1b1db808",
+    "historyId": "TC01",
+    "fullName": "TC01",
+    "labels": [
+        {
+            "name": "framework",
+            "value": "Playwright"
+        },
+        {
+            "name": "language",
+            "value": "Python"
+        }
+    ]
+}

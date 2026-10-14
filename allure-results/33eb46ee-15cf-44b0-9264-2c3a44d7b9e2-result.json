@@ -1,0 +1,19 @@
+{
+    "name": "Verify locked out user cannot login to add Sauce Labs Backpack",
+    "status": "passed",
+    "start": 1792001713219,
+    "stop": 1792001713316,
+    "uuid": "33eb46ee-15cf-44b0-9264-2c3a44d7b9e2",
+    "historyId": "TC05",
+    "fullName": "TC05",
+    "labels": [
+        {
+            "name": "framework",
+            "value": "Playwright"
+        },
+        {
+            "name": "language",
+            "value": "Python"
+        }
+    ]
+}

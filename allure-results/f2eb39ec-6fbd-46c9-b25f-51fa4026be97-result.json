@@ -1,0 +1,19 @@
+{
+    "name": "Verify user cannot add item to cart when login fails with invalid credentials",
+    "status": "passed",
+    "start": 1792001713094,
+    "stop": 1792001713218,
+    "uuid": "f2eb39ec-6fbd-46c9-b25f-51fa4026be97",
+    "historyId": "TC04",
+    "fullName": "TC04",
+    "labels": [
+        {
+            "name": "framework",
+            "value": "Playwright"
+        },
+        {
+            "name": "language",
+            "value": "Python"
+        }
+    ]
+}

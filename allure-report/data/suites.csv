@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","97","Verify locked out user cannot login to add Sauce Labs Backpack","","2026-10-14","passed","2026-10-14","","","",""
+"","30146","Verify Sauce Labs Backpack persists in cart page after addition","","2026-10-14","failed","2026-10-14","","","",""
+"","30182","Verify adding Sauce Labs Backpack to cart from product details page","","2026-10-14","failed","2026-10-14","","","",""
+"","587","Verify successful login and adding Sauce Labs Backpack to cart from inventory page","","2026-10-14","passed","2026-10-14","","","",""
+"","124","Verify user cannot add item to cart when login fails with invalid credentials","","2026-10-14","passed","2026-10-14","","","",""

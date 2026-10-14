@@ -1,0 +1,25 @@
+{
+    "name": "Verify Sauce Labs Backpack persists in cart page after addition",
+    "status": "failed",
+    "statusDetails": {
+        "known": false,
+        "flaky": false,
+        "message": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#add-to-cart-sauce-labs-backpack\")\n",
+        "trace": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#add-to-cart-sauce-labs-backpack\")\n"
+    },
+    "start": 1792001682945,
+    "stop": 1792001713091,
+    "uuid": "0e2f55ed-58eb-439a-9abd-3e34badd3378",
+    "historyId": "TC03",
+    "fullName": "TC03",
+    "labels": [
+        {
+            "name": "framework",
+            "value": "Playwright"
+        },
+        {
+            "name": "language",
+            "value": "Python"
+        }
+    ]
+}

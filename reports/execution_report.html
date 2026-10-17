@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI QA Agent — Execution Report</title>
+    <style>
+        :root {
+            --bg: #0f1419;
+            --panel: #1a2332;
+            --line: #2b3a4f;
+            --text: #e8eef6;
+            --muted: #93a4b8;
+            --pass: #3dd68c;
+            --fail: #ff6b6b;
+            --skip: #f5c542;
+            --unknown: #8b9cb3;
+            --accent: #5b9dff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Segoe UI, Tahoma, sans-serif;
+            background: radial-gradient(circle at top, #1c2940 0%, var(--bg) 45%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin: 0 0 24px;
+            font-size: 14px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .card .label {
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .card .value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .value.pass { color: var(--pass); }
+        .value.fail { color: var(--fail); }
+        .value.skip { color: var(--skip); }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-left: 6px solid var(--unknown);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+        }
+
+        .banner.pass { border-left-color: var(--pass); }
+        .banner.fail { border-left-color: var(--fail); }
+        .banner.unknown { border-left-color: var(--unknown); }
+
+        .bar {
+            height: 10px;
+            background: #243044;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--pass), var(--accent));
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin: 0 0 14px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #223044;
+            color: var(--text);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        button.active {
+            background: var(--accent);
+            color: #071018;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px 14px;
+            vertical-align: top;
+            border-bottom: 1px solid var(--line);
+        }
+
+        th {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            background: #162033;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .numeric { text-align: right; }
+
+        code {
+            background: #0f1a28;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .badge {
+            display: inline-block;
+            min-width: 64px;
+            text-align: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge.pass { background: rgba(61, 214, 140, 0.18); color: var(--pass); }
+        .badge.fail { background: rgba(255, 107, 107, 0.18); color: var(--fail); }
+        .badge.skip { background: rgba(245, 197, 66, 0.18); color: var(--skip); }
+        .badge.unknown { background: rgba(139, 156, 179, 0.18); color: var(--unknown); }
+
+        .error {
+            margin: 0;
+            white-space: pre-wrap;
+            color: #ffd1d1;
+            font-size: 12px;
+            background: #2a1518;
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        .muted { color: var(--muted); }
+
+        .empty {
+            text-align: center;
+            padding: 28px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>AI QA Agent — Execution Report</h1>
+        <p class="subtitle">
+            Source: execution_report.json · Generated: 2026-10-14T23:45:13
+        </p>
+
+        <div class="banner fail">
+            <div>
+                <div class="label muted">Overall result</div>
+                <strong>Failed</strong>
+            </div>
+            <div>
+                Pass rate: <strong>60.0%</strong>
+                <div class="bar">
+                    <span style="width: 60.0%;"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="label">Total</div>
+                <div class="value">5</div>
+            </div>
+            <div class="card">
+                <div class="label">Passed</div>
+                <div class="value pass">3</div>
+            </div>
+            <div class="card">
+                <div class="label">Failed</div>
+                <div class="value fail">2</div>
+            </div>
+            <div class="card">
+                <div class="label">Duration (s)</div>
+                <div class="value">61.14</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="active" data-filter="ALL">All</button>
+            <button data-filter="PASS">Pass</button>
+            <button data-filter="FAIL">Fail</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Executed at</th>
+                    <th>Duration (s)</th>
+                    <th>Error</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr class="row pass" data-status="PASS">
+                <td><code>TC01</code></td>
+                <td>Verify successful login and adding Sauce Labs Backpack to cart from inventory page</td>
+                <td><span class="badge pass">PASS</span></td>
+                <td>2026-10-14T23:44:12</td>
+                <td class="numeric">0.59</td>
+                <td><span class="muted">—</span></td>
+            </tr>
+            
+
+            <tr class="row fail" data-status="FAIL">
+                <td><code>TC02</code></td>
+                <td>Verify adding Sauce Labs Backpack to cart from product details page</td>
+                <td><span class="badge fail">FAIL</span></td>
+                <td>2026-10-14T23:44:12</td>
+                <td class="numeric">30.18</td>
+                <td><pre class="error">Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&quot;.inventory_details_desc_container #add-to-cart-sauce-labs-backpack&quot;)
+</pre></td>
+            </tr>
+            
+
+            <tr class="row fail" data-status="FAIL">
+                <td><code>TC03</code></td>
+                <td>Verify Sauce Labs Backpack persists in cart page after addition</td>
+                <td><span class="badge fail">FAIL</span></td>
+                <td>2026-10-14T23:44:42</td>
+                <td class="numeric">30.15</td>
+                <td><pre class="error">Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(&quot;#add-to-cart-sauce-labs-backpack&quot;)
+</pre></td>
+            </tr>
+            
+
+            <tr class="row pass" data-status="PASS">
+                <td><code>TC04</code></td>
+                <td>Verify user cannot add item to cart when login fails with invalid credentials</td>
+                <td><span class="badge pass">PASS</span></td>
+                <td>2026-10-14T23:45:13</td>
+                <td class="numeric">0.12</td>
+                <td><span class="muted">—</span></td>
+            </tr>
+            
+
+            <tr class="row pass" data-status="PASS">
+                <td><code>TC05</code></td>
+                <td>Verify locked out user cannot login to add Sauce Labs Backpack</td>
+                <td><span class="badge pass">PASS</span></td>
+                <td>2026-10-14T23:45:13</td>
+                <td class="numeric">0.1</td>
+                <td><span class="muted">—</span></td>
+            </tr>
+            
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll("button[data-filter]");
+        const rows = document.querySelectorAll("tr.row");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                buttons.forEach((item) => item.classList.remove("active"));
+                button.classList.add("active");
+
+                const filter = button.dataset.filter;
+                rows.forEach((row) => {
+                    const match = filter === "ALL" || row.dataset.status === filter;
+                    row.style.display = match ? "" : "none";
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -36,8 +36,8 @@ coverage.xml
 Thumbs.db
 
 # Generated reports
-reports/*.html
-reports/*.json
+# reports/*.html
+# reports/*.json
 
 # Logs
 *.log

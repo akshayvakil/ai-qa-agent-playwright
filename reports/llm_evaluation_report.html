@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>AI QA Test Case Evaluation</title>
+<style>body{font-family:Arial,sans-serif;margin:28px;color:#202124}h1,h2{color:#243447}table{border-collapse:collapse;width:100%;margin:12px 0 26px}th,td{border:1px solid #ddd;padding:9px;text-align:left;vertical-align:top}th{background:#eef2f6}tr:nth-child(even){background:#fafafa}.cards{display:flex;flex-wrap:wrap;gap:12px}.card{border:1px solid #ddd;border-radius:8px;padding:12px;min-width:125px}.card b{display:block;font-size:22px;margin-top:6px}.note{background:#f5f7f9;padding:12px}.error{color:#9b1c1c}.small{color:#555}</style></head><body>
+<h1>AI QA Test Case Evaluation</h1><p class="small">Generated: 2026-10-18 00:07:18</p>
+<p><b>Model:</b> gemini-3.8-flash | <b>Mapping cache:</b> CACHE HIT</p><p class='error'><b>Run-level error:</b> Stopped manually by user (KeyboardInterrupt).</p>
+<div class="cards">
+<div class="card">Test cases<b>5</b></div><div class="card">Requirements<b>10</b></div>
+<div class="card">Requirements covered<b>4</b></div><div class="card">Coverage<b>40.0%</b></div>
+<div class="card">PASS<b>0</b></div><div class="card">FAIL<b>0</b></div><div class="card">ERROR / SKIPPED<b>0 / 0</b></div>
+<div class="card">Average score<b>N/A</b></div><div class="card">Elapsed seconds<b>335.78</b></div></div>
+<h2>1. Requirement coverage</h2><p>Coverage is traceability coverage, not proof that a requirement is fully tested.</p>
+<table><thead><tr><th>ID</th><th>Requirement</th><th>Status</th></tr></thead><tbody><tr><td>REQ-001</td><td>Successful Login</td><td>Covered</td></tr><tr><td>REQ-002</td><td>Invalid Login</td><td>Covered</td></tr><tr><td>REQ-003</td><td>Inventory Display</td><td>Gap</td></tr><tr><td>REQ-004</td><td>Add Product to Cart</td><td>Covered</td></tr><tr><td>REQ-005</td><td>Remove Product from Cart</td><td>Gap</td></tr><tr><td>REQ-006</td><td>Cart Contents</td><td>Covered</td></tr><tr><td>REQ-007</td><td>Checkout Information</td><td>Gap</td></tr><tr><td>REQ-008</td><td>Checkout Validation</td><td>Gap</td></tr><tr><td>REQ-009</td><td>Order Completion</td><td>Gap</td></tr><tr><td>REQ-010</td><td>Logout</td><td>Gap</td></tr></tbody></table>
+<h2>2. AI-generated requirement mappings</h2><p>Review these suggestions before treating them as an approved traceability matrix.</p>
+<table><thead><tr><th>Test ID</th><th>Test case</th><th>Mapped requirements</th></tr></thead><tbody><tr><td>TC01</td><td>Verify successful login and adding Sauce Labs Backpack to cart from inventory page</td><td>REQ-001, REQ-004</td></tr><tr><td>TC02</td><td>Verify adding Sauce Labs Backpack to cart from product details page</td><td>REQ-004</td></tr><tr><td>TC03</td><td>Verify Sauce Labs Backpack persists in cart page after addition</td><td>REQ-006</td></tr><tr><td>TC04</td><td>Verify user cannot add item to cart when login fails with invalid credentials</td><td>REQ-002</td></tr><tr><td>TC05</td><td>Verify locked out user cannot login to add Sauce Labs Backpack</td><td>REQ-002</td></tr></tbody></table>
+<h2>3. DeepEval semantic evaluation</h2><p>G-Eval threshold: 0.70. A score is a model-generated judgment, not proof of correctness or execution.</p>
+<table><thead><tr><th>ID</th><th>Title</th><th>Status</th><th>Score</th><th>Seconds</th><th>Reason / error</th></tr></thead><tbody></tbody></table>
+<h2>4. Token usage and cost</h2><p class="note">Partial total: one or more operations did not expose token counts. N/A means unavailable, not zero. Cached mappings make no new mapping call. Costs appear only when a library reports them; this script does not guess prices.</p>
+<table><thead><tr><th>Operation</th><th>Input</th><th>Output</th><th>Total</th><th>Cost</th><th>Measurement status</th></tr></thead>
+<tbody><tr><td>Gemini requirement mapping</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Cached mapping; no mapping API call this run</td></tr></tbody><tfoot><tr><th>Known totals</th><td>N/A</td>
+<td>N/A</td><td>N/A</td>
+<td>N/A</td><td>Partial</td></tr></tfoot></table>
+<h2>5. Deterministic validation findings</h2><ul><li>REQ-003 is not covered by mapped test cases.</li><li>REQ-005 is not covered by mapped test cases.</li><li>REQ-007 is not covered by mapped test cases.</li><li>REQ-008 is not covered by mapped test cases.</li><li>REQ-009 is not covered by mapped test cases.</li><li>REQ-010 is not covered by mapped test cases.</li></ul>
+<h2>6. Interpretation notes</h2><ul><li>Requirement mapping is AI-suggested traceability and needs review.</li><li>G-Eval scores may vary; they are not proof of test correctness.</li><li>API errors/timeouts are distinct from a test case failing against the application.</li><li>Coverage gaps indicate requirements without a mapped test, not necessarily missing tests in every repository.</li></ul>
+</body></html>

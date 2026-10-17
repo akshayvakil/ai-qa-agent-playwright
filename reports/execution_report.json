@@ -1,0 +1,42 @@
+[
+    {
+        "test_id": "TC01",
+        "title": "Verify successful login and adding Sauce Labs Backpack to cart from inventory page",
+        "status": "PASS",
+        "executed_at": "2026-10-14T23:44:12",
+        "duration_seconds": 0.59,
+        "error": null
+    },
+    {
+        "test_id": "TC02",
+        "title": "Verify adding Sauce Labs Backpack to cart from product details page",
+        "status": "FAIL",
+        "executed_at": "2026-10-14T23:44:12",
+        "duration_seconds": 30.18,
+        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\".inventory_details_desc_container #add-to-cart-sauce-labs-backpack\")\n"
+    },
+    {
+        "test_id": "TC03",
+        "title": "Verify Sauce Labs Backpack persists in cart page after addition",
+        "status": "FAIL",
+        "executed_at": "2026-10-14T23:44:42",
+        "duration_seconds": 30.15,
+        "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#add-to-cart-sauce-labs-backpack\")\n"
+    },
+    {
+        "test_id": "TC04",
+        "title": "Verify user cannot add item to cart when login fails with invalid credentials",
+        "status": "PASS",
+        "executed_at": "2026-10-14T23:45:13",
+        "duration_seconds": 0.12,
+        "error": null
+    },
+    {
+        "test_id": "TC05",
+        "title": "Verify locked out user cannot login to add Sauce Labs Backpack",
+        "status": "PASS",
+        "executed_at": "2026-10-14T23:45:13",
+        "duration_seconds": 0.1,
+        "error": null
+    }
+]

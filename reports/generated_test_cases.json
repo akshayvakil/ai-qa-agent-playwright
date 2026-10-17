@@ -1,0 +1,64 @@
+{
+    "test_cases": [
+        {
+            "id": "TC01",
+            "title": "Verify successful login and adding Sauce Labs Backpack to cart from inventory page",
+            "type": "UI",
+            "steps": [
+                "Navigate to SauceDemo login page",
+                "Enter valid username 'standard_user' and password 'secret_sauce'",
+                "Click the 'Login' button",
+                "Locate the 'Sauce Labs Backpack' item on the inventory page",
+                "Click the 'Add to cart' button for the Sauce Labs Backpack"
+            ],
+            "expected_result": "User is logged in successfully, button text changes to 'Remove', and the shopping cart badge displays '1'"
+        },
+        {
+            "id": "TC02",
+            "title": "Verify adding Sauce Labs Backpack to cart from product details page",
+            "type": "UI",
+            "steps": [
+                "Navigate to SauceDemo login page",
+                "Enter valid username 'standard_user' and password 'secret_sauce'",
+                "Click the 'Login' button",
+                "Click on the 'Sauce Labs Backpack' product title or image to open details page",
+                "Click the 'Add to cart' button"
+            ],
+            "expected_result": "Product details page loads, button changes to 'Remove', and cart badge shows '1'"
+        },
+        {
+            "id": "TC03",
+            "title": "Verify Sauce Labs Backpack persists in cart page after addition",
+            "type": "UI",
+            "steps": [
+                "Navigate to SauceDemo login page",
+                "Login with valid credentials",
+                "Click 'Add to cart' on 'Sauce Labs Backpack'",
+                "Click the shopping cart icon in the top right corner"
+            ],
+            "expected_result": "Cart page opens and displays 'Sauce Labs Backpack' with quantity 1 and correct price"
+        },
+        {
+            "id": "TC04",
+            "title": "Verify user cannot add item to cart when login fails with invalid credentials",
+            "type": "UI",
+            "steps": [
+                "Navigate to SauceDemo login page",
+                "Enter invalid username 'invalid_user' and password 'wrong_password'",
+                "Click the 'Login' button"
+            ],
+            "expected_result": "User remains on login page, error message is displayed, and inventory/cart is inaccessible"
+        },
+        {
+            "id": "TC05",
+            "title": "Verify locked out user cannot login to add Sauce Labs Backpack",
+            "type": "UI",
+            "steps": [
+                "Navigate to SauceDemo login page",
+                "Enter username 'locked_out_user' and password 'secret_sauce'",
+                "Click the 'Login' button"
+            ],
+            "expected_result": "Error message 'Epic sadface: Sorry, this user has been locked out.' is displayed, and user cannot access inventory"
+        }
+    ]
+}

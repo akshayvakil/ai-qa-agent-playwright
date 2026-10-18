@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faithfulness and Hallucination Evaluation</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 28px; color: #222; }
+h1 { margin-bottom: 8px; }
+.summary { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.card { border: 1px solid #ddd; border-radius: 8px; padding: 14px; min-width: 110px; }
+table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+th, td { border: 1px solid #ddd; padding: 9px; text-align: left; vertical-align: top; }
+th { background: #f2f2f2; }
+.badge { display: inline-block; border-radius: 4px; padding: 4px 7px; font-weight: bold; }
+.pass { background: #d9f2df; color: #14532d; }
+.fail { background: #ffe0e0; color: #8b1e1e; }
+.error, .unmapped, .ambiguous-match, .invalid-requirement-id { color: #9a3412; }
+.error { background: #fff1f0; padding: 10px; }
+details { min-width: 180px; margin-bottom: 6px; }
+small { color: #555; }
+</style>
+</head>
+<body>
+<h1>LLM Test Case Integrity Evaluation</h1>
+<p>Generated at: 2026-10-18 12:32:37</p>
+<p>Model: gemini-3.8-flash</p>
+<p>Total evaluation time: 29.08 seconds</p>
+<p class='error'><b>Run issue:</b> Gemini API quota appears exhausted. Evaluation stopped to avoid repeatedly calling the API. Check the quota and billing for the Google AI Studio project.</p>
+
+<div class="summary">
+<div class="card"><b>Total cases</b><h2>4</h2></div>
+<div class="card"><b>Passed gates</b><h2>0</h2></div>
+<div class="card"><b>Failed gates</b><h2>0</h2></div>
+<div class="card"><b>Unmapped/errors</b><h2>4</h2></div>
+</div>
+
+<p><b>Gate policy:</b> Faithfulness must meet its minimum threshold;
+Hallucination must remain at or below its maximum threshold.
+Contextual Relevancy is shown as a score and threshold status.</p>
+
+<p><small>LLM-as-a-judge results are estimates, not proof of correctness.
+Review failures and borderline scores manually. Keyword-based requirement
+matching can be ambiguous and is reported as unmapped when uncertain.</small></p>
+
+<table>
+<thead><tr>
+<th>Test ID</th><th>Title</th><th>Requirement</th><th>Overall</th>
+<th>Faithfulness score</th><th>Faithfulness status</th><th>Seconds</th>
+<th>Hallucination score</th><th>Hallucination status</th><th>Seconds</th>
+<th>Contextual Relevancy score</th><th>Relevancy status</th><th>Seconds</th>
+<th>Metric reasons</th>
+</tr></thead>
+<tbody>
+        <tr>
+            <td>TC01</td>
+            <td>Verify successful login and adding Sauce Labs Backpack to cart from inventory page</td>
+            <td>[&#x27;REQ-001&#x27;]</td>
+            <td><span class="badge error">ERROR</span></td>
+            <td>1.000</td><td><span class="badge pass">PASS</span></td><td>18.77</td>
+            <td>N/A</td><td><span class="badge error">ERROR</span></td><td>8.62</td>
+            <td>N/A</td><td><span class="badge error">ERROR</span></td><td>1.25</td>
+            <td><details><summary>Faithfulness: PASS</summary><p>The score is 1.00 because the output is completely faithful to the retrieval context with no contradictions found, great job!</p></details><details><summary>Hallucination: ERROR</summary><p>Metric execution failed: 503 UNAVAILABLE. {&#x27;error&#x27;: {&#x27;code&#x27;: 503, &#x27;message&#x27;: &#x27;This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.&#x27;, &#x27;status&#x27;: &#x27;UNAVAILABLE&#x27;}}</p></details><details><summary>Contextual Relevancy: ERROR</summary><p>Metric execution failed: 503 UNAVAILABLE. {&#x27;error&#x27;: {&#x27;code&#x27;: 503, &#x27;message&#x27;: &#x27;This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.&#x27;, &#x27;status&#x27;: &#x27;UNAVAILABLE&#x27;}}</p></details></td>
+        </tr>
+        
+        <tr>
+            <td>TC02</td>
+            <td>Verify adding Sauce Labs Backpack to cart from product details page</td>
+            <td>Not matched</td>
+            <td><span class="badge unmapped">UNMAPPED</span></td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td>TC03</td>
+            <td>Verify Sauce Labs Backpack persists in cart page after addition</td>
+            <td>Not matched</td>
+            <td><span class="badge unmapped">UNMAPPED</span></td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td>TC04</td>
+            <td>Verify user cannot add item to cart when login fails with invalid credentials</td>
+            <td>[&#x27;REQ-002&#x27;]</td>
+            <td><span class="badge error">ERROR</span></td>
+            <td>N/A</td><td><span class="badge error">ERROR</span></td><td>0.43</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td>N/A</td><td>N/A</td><td>N/A</td>
+            <td><details><summary>Faithfulness: ERROR</summary><p>Metric execution failed: 429 RESOURCE_EXHAUSTED. {&#x27;error&#x27;: {&#x27;code&#x27;: 429, &#x27;message&#x27;: &#x27;You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash\nPlease retry in 53.216645678s.&#x27;, &#x27;status&#x27;: &#x27;RESOURCE_EXHAUSTED&#x27;, &#x27;details&#x27;: [{&#x27;@type&#x27;: &#x27;type.googleapis.com/google.rpc.Help&#x27;, &#x27;links&#x27;: [{&#x27;description&#x27;: &#x27;Learn more about Gemini API quotas&#x27;, &#x27;url&#x27;: &#x27;https://ai.google.dev/gemini-api/docs/rate-limits&#x27;}]}, {&#x27;@type&#x27;: &#x27;type.googleapis.com/google.rpc.QuotaFailure&#x27;, &#x27;violations&#x27;: [{&#x27;quotaMetric&#x27;: &#x27;generativelanguage.googleapis.com/generate_content_free_tier_requests&#x27;, &#x27;quotaId&#x27;: &#x27;GenerateRequestsPerMinutePerProjectPerModel-FreeTier&#x27;, &#x27;quotaDimensions&#x27;: {&#x27;location&#x27;: &#x27;global&#x27;, &#x27;model&#x27;: &#x27;gemini-3.8-flash&#x27;}, &#x27;quotaValue&#x27;: &#x27;5&#x27;}]}, {&#x27;@type&#x27;: &#x27;type.googleapis.com/google.rpc.RetryInfo&#x27;, &#x27;retryDelay&#x27;: &#x27;53s&#x27;}]}}</p></details></td>
+        </tr>
+        </tbody>
+</table>
+
+<h2>Thresholds</h2>
+<ul>
+<li>Faithfulness: score ≥ 0.7</li>
+<li>Hallucination: score ≤ 0.5</li>
+<li>Contextual Relevancy: score ≥ 0.7</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+# Name displayed in the GitHub Actions tab
+name: AI QA Agent CI
+
+# 1. Trigger the workflow automatically
+on:
+  push:                 # Starts when code is pushed to GitHub
+  pull_request:          # Starts when a pull request is opened or updated
+  workflow_dispatch:     # Allows manual execution from GitHub Actions
+
+# Define the jobs that the workflow will execute
+jobs:
+  automation-tests:
+
+    # 2. Run the job on a fresh GitHub-hosted Ubuntu runner
+    runs-on: ubuntu-latest
+
+    # Execute these steps sequentially
+    steps:
+
+      # Download the repository code to the GitHub runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Python 3.11 on the runner
+      # This is separate from your local Windows .venv
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Install project dependencies from requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+
+      # Install Chromium and its required system dependencies
+      # Playwright needs a browser to execute UI tests
+      - name: Install Playwright browser
+        run: python -m playwright install --with-deps chromium
+
+      # 4. Execute your existing automation runner
+      # This command must match your project's working run command
+      - name: Run automation tests
+        run: python runner.py
+
+      # 5. Attempt to upload reports even if an earlier step fails
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          # Name of the downloadable artifact in GitHub Actions
+          name: ai-qa-agent-reports
+
+          # Report paths relative to the repository root
+          path: |
+            execution_report.json
+            execution_report.html
+            reports/
+            allure-results/
+
+          # Warn if a report path does not exist instead of failing this step
+          if-no-files-found: warn

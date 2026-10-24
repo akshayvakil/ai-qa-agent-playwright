@@ -127,7 +127,7 @@ def main():
         # headless=False makes the browser window visible.
         browser = p.chromium.launch(
             channel="chrome",
-            headless=False
+            headless=True
         )
 
         try:

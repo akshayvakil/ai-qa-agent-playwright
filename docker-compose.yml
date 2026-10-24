@@ -1,0 +1,9 @@
+
+services:
+  ai-qa-agent:
+    build: .
+    image: ai-qa-agent:latest
+    container_name: ai-qa-agent
+    volumes:
+      - ./reports:/app/reports
+      - ./allure-results:/app/allure-results

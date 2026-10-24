@@ -1,63 +1,145 @@
+# =========================================================
+# WORKFLOW NAME
+# =========================================================
 
 # Name displayed in the GitHub Actions tab
 name: AI QA Agent CI
 
-# 1. Trigger the workflow automatically
-on:
-  push:                 # Starts when code is pushed to GitHub
-  pull_request:          # Starts when a pull request is opened or updated
-  workflow_dispatch:     # Allows manual execution from GitHub Actions
 
-# Define the jobs that the workflow will execute
+# =========================================================
+# 1. TRIGGERS — WHEN SHOULD THE WORKFLOW RUN?
+# =========================================================
+
+# The workflow starts automatically when specified events occur.
+on:
+  # Runs when code is pushed to the repository
+  push:
+
+  # Runs when a pull request is opened or updated
+  pull_request:
+
+  # Allows a user to start the workflow manually from GitHub
+  workflow_dispatch:
+
+
+# =========================================================
+# JOBS — WHAT WORK SHOULD GITHUB PERFORM?
+# =========================================================
+
+# A workflow contains one or more jobs.
 jobs:
+
+  # Job identifier; used internally by GitHub Actions
   automation-tests:
 
-    # 2. Run the job on a fresh GitHub-hosted Ubuntu runner
+    # =====================================================
+    # 2. RUNNER — WHERE WILL THE JOB EXECUTE?
+    # =====================================================
+
+    # GitHub provides a fresh Ubuntu virtual machine for this job.
+    # This is separate from our local Windows machine.
     runs-on: ubuntu-latest
 
-    # Execute these steps sequentially
+    # =====================================================
+    # STEPS — WHAT ACTIONS SHOULD THE JOB PERFORM?
+    # Steps execute sequentially within this job.
+    # =====================================================
+
     steps:
 
-      # Download the repository code to the GitHub runner
+      # -----------------------------------------------------
+      # STEP 1: CHECKOUT REPOSITORY
+      # -----------------------------------------------------
+
+      # Friendly name displayed in the workflow logs
       - name: Checkout repository
+
+        # Reusable action that downloads repository code.
+        # actions = action publisher/organization
+        # checkout = action name
+        # @v4 = action version 4
         uses: actions/checkout@v4
 
-      # Set up Python 3.11 on the runner
-      # This is separate from your local Windows .venv
+
+      # -----------------------------------------------------
+      # STEP 2: SET UP PYTHON
+      # -----------------------------------------------------
+
       - name: Set up Python
+
+        # Installs/configures the requested Python version
+        # on the GitHub-hosted runner.
         uses: actions/setup-python@v5
+
+        # Input parameters for the setup-python action
         with:
+
+          # Use Python 3.11 for this project
           python-version: "3.11"
 
-      # 3. Install project dependencies from requirements.txt
+
+      # -----------------------------------------------------
+      # STEP 3: INSTALL PROJECT DEPENDENCIES
+      # -----------------------------------------------------
+
       - name: Install dependencies
+
+        # Execute shell commands on the Ubuntu runner.
+        # The pipe (|) allows multiple command lines.
         run: |
+
+          # Install the Python packages listed in requirements.txt
           python -m pip install -r requirements.txt
 
-      # Install Chromium and its required system dependencies
-      # Playwright needs a browser to execute UI tests
+
+      # -----------------------------------------------------
+      # STEP 4: INSTALL PLAYWRIGHT BROWSER
+      # -----------------------------------------------------
+
       - name: Install Playwright browser
+
+        # Install Chromium and its required Linux system dependencies.
+        # Playwright uses this browser to execute UI automation.
         run: python -m playwright install --with-deps chromium
 
-      # 4. Execute your existing automation runner
-      # This command must match your project's working run command
+
+      # -----------------------------------------------------
+      # STEP 5: EXECUTE AUTOMATION TESTS
+      # -----------------------------------------------------
+
       - name: Run automation tests
+
+        # Run the project's existing test runner.
+        # This step currently executes runner.py only.
         run: python runner.py
 
-      # 5. Attempt to upload reports even if an earlier step fails
+
+      # -----------------------------------------------------
+      # STEP 6: UPLOAD TEST REPORTS
+      # -----------------------------------------------------
+
       - name: Upload test reports
+
+        # Attempt this step even if an earlier step failed.
+        # This helps preserve reports generated before a failure.
         if: always()
+
+        # Reusable action for uploading files as downloadable artifacts.
         uses: actions/upload-artifact@v4
+
+        # Inputs for the artifact upload action
         with:
-          # Name of the downloadable artifact in GitHub Actions
+
+          # Name shown for the downloadable artifact in GitHub Actions
           name: ai-qa-agent-reports
 
-          # Report paths relative to the repository root
+          # Paths are relative to the repository root.
+          # Upload the JSON report, HTML report and Allure results.
           path: |
-            execution_report.json
-            execution_report.html
-            reports/
+            reports/execution_report.json
+            reports/execution_report.html
             allure-results/
 
-          # Warn if a report path does not exist instead of failing this step
+          # If some report paths do not exist, issue a warning
+          # instead of failing the upload step for that reason.
           if-no-files-found: warn
